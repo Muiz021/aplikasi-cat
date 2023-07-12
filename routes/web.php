@@ -69,7 +69,7 @@ Route::prefix('admin')->middleware(['auth', 'OnlyAdmin'])->group(function () {
 Route::prefix('pelajar')->middleware(['auth', 'OnlyPelajar'])->group(function () {
     ##dashboard##
     Route::get('dashboard', function () {
-        return view('pages.admin.dashboard.dashboard');
+        return view('pages.pelajar.dashboard.dashboard');
     })->name('pelajar.dashboard');
     ##end dashboard##
 

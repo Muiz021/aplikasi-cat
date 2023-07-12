@@ -5,6 +5,7 @@
 @php
 use App\Models\Pelajaran;
 use App\Models\User;
+use App\Models\Ujian;
 @endphp
     <div class="content-wrapper">
         <div class="content-header">
@@ -19,8 +20,7 @@ use App\Models\User;
         <section class="content">
             <div class="container-fluid">
                 <div class="row">
-                    @if (Auth::user()->roles == 'admin')
-                    <div class="col-lg-6 col-6">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
                         <!-- small box -->
                         <div class="small-box bg-success">
                             <div class="inner">
@@ -36,7 +36,7 @@ use App\Models\User;
                         </div>
                     </div>
                     <!-- ./col -->
-                    <div class="col-lg-6 col-6">
+                    <div class="col-lg-4 col-md-6 col-sm-12">
                         <!-- small box -->
                         <div class="small-box bg-warning">
                             <div class="inner">
@@ -50,9 +50,21 @@ use App\Models\User;
                                     class="fas fa-arrow-circle-right"></i></a>
                         </div>
                     </div>
-                    @else
-                    <h1>pelajar</h1>
-                    @endif
+                    <!-- ./col -->
+                    <div class="col-lg-4 col-md-6 col-sm-12">
+                        <!-- small box -->
+                        <div class="small-box bg-danger">
+                            <div class="inner">
+                                <h3>{{Ujian::count()}}</h3>
+                                <p>Ujian</p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-pie-graph"></i>
+                            </div>
+                            <a href="{{route('admin.ujian.index')}}" class="small-box-footer">More info <i
+                                    class="fas fa-arrow-circle-right"></i></a>
+                        </div>
+                    </div>
                     <!-- ./col -->
                 </div>
             </div>

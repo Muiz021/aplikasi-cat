@@ -83,7 +83,13 @@
                             {{-- card body --}}
                             <div class="card-footer">
                                 <div class="d-flex justify-content-end">
-                                    <a class="btn btn-danger" href="{{ route('admin.ujian.index') }}">Kembali</a>
+                                    <form action="{{ route('admin.ujian.show', $pelajaran->id) }}" method="GET">
+                                        <input type="hidden" name="pelajaran_id" id=""
+                                            value="{{ $pelajaran->id }}">
+                                        <button type="submit" class="btn btn-danger">
+                                            Kembali
+                                        </button>
+                                    </form>
                                 </div>
                             </div>
                             {{-- card footer --}}

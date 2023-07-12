@@ -48,21 +48,23 @@
                                                             <td>{{ $item->nama }}</td>
                                                             <td>
                                                                 <div class="d-flex">
-                                                                    @if ($item->ujian->isNotEmpty())
-                                                                        <form action="{{ route('admin.ujian.show', $item->id) }}">
-                                                                            <button type="submit" class="btn btn-info">
-                                                                                <span><i
-                                                                                        class="fas fa-eye mr-1"></i><b>View</b></span>
+                                                                    @if (!$item->ujian->isEmpty())
+                                                                            <form
+                                                                                action="{{ route('admin.ujian.show', $item->id) }}">
+                                                                                <button type="submit" class="btn btn-info">
+                                                                                    <input type="hidden" name="pelajaran_id" id="" value="{{$item->id}}">
+                                                                                    <span><i
+                                                                                            class="fas fa-eye mr-1"></i><b>View</b></span>
+                                                                                </button>
+                                                                            </form>
+                                                                        @else
+                                                                            <button type="button" class="btn btn-warning"
+                                                                                data-toggle="modal"
+                                                                                data-target="#modal-info-{{ $item->id }}">
+                                                                                <span style="color: white"><i
+                                                                                        class="fas fa-info mr-1"></i><b>Info</b></span>
                                                                             </button>
-                                                                        </form>
-                                                                    @else
-                                                                    <button type="button" class="btn btn-warning"
-                                                                    data-toggle="modal"
-                                                                    data-target="#modal-info-{{ $item->id }}">
-                                                                    <span style="color: white"><i
-                                                                            class="fas fa-info mr-1"></i><b>Info</b></span>
-                                                                </button>
-                                                                    @endif
+                                                                        @endif
                                                                 </div>
                                                             </td>
                                                         </tr>

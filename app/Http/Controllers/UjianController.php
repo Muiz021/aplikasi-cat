@@ -73,15 +73,15 @@ class UjianController extends Controller
 
         return redirect()->route('ujian.index');
     }
-    public function show($id)
+    public function show(Request $request,$id)
     {
+        $pelajaran_id = $request->pelajaran_id;
         $user = Auth::user();
         if($user->roles == 'admin'){
-            $ujian = Ujian::get();
+            $ujian = Ujian::where('pelajaran_id',$pelajaran_id)->get();
             return view('pages.admin.ujian.show', compact('ujian'));
         }else{
-            $pelajaran = Pelajaran::where('id', $id)->first();
-            $ujian = Ujian::where('user_id',$user->id)->first();
+            $ujian = Ujian::where('id',$id)->where('user_id',$user->id)->first();
             return view('pages.pelajar.ujian.show', compact('ujian'));
         }
     }
@@ -89,6 +89,7 @@ class UjianController extends Controller
     public function detail_show($id)
     {
         $ujian = Ujian::where('id',$id)->first();
-        return view('pages.admin.ujian.detail-show',compact('ujian'));
+        $pelajaran = Pelajaran::where('id',$ujian->pelajaran_id)->first();
+        return view('pages.admin.ujian.detail-show',compact('ujian','pelajaran'));
     }
 }

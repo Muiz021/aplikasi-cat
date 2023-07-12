@@ -20,7 +20,6 @@ class OnlyAdmin
         if(Auth::user()->roles != 'admin'){
             return redirect('/login');
         }
-        
         return $next($request);
     }
 }

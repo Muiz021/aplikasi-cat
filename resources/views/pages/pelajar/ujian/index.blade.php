@@ -49,15 +49,7 @@
                                                             <td>
                                                                 <div class="d-flex">
                                                                     @if (Auth::user()->roles == 'pelajar')
-                                                                        @if ($item->ujian->isNotEmpty())
-                                                                            <form
-                                                                                action="{{ route('ujian.show', $item->id) }}">
-                                                                                <button type="submit" class="btn btn-info">
-                                                                                    <span><i
-                                                                                            class="fas fa-eye mr-1"></i><b>View</b></span>
-                                                                                </button>
-                                                                            </form>
-                                                                        @else
+                                                                        @if ($item->ujian->where('user_id',Auth::user()->id)->isEmpty())
                                                                             <form
                                                                                 action="{{ route('ujian.edit', $item->id) }}">
                                                                                 <button type="submit"
@@ -66,23 +58,19 @@
                                                                                             class="fas fa-pen mr-1"></i><b>work</b></span>
                                                                                 </button>
                                                                             </form>
-                                                                        @endif
-                                                                    @elseif(Auth::user()->roles == 'admin')
-                                                                        @if ($item->ujian->isNotEmpty())
-                                                                            <form
-                                                                                action="{{ route('admin.ujian.show', $item->id) }}">
-                                                                                <button type="submit" class="btn btn-info">
-                                                                                    <span><i
-                                                                                            class="fas fa-eye mr-1"></i><b>View</b></span>
-                                                                                </button>
-                                                                            </form>
                                                                         @else
-                                                                            <button type="button" class="btn btn-warning"
-                                                                                data-toggle="modal"
-                                                                                data-target="#modal-delete-{{ $item->id }}">
-                                                                                <span style="color: white"><i
-                                                                                        class="fas fa-info mr-1"></i><b>Info</b></span>
-                                                                            </button>
+                                                                            @foreach ($item->ujian->where('user_id',Auth::user()->id) as $tombol)
+                                                                                @if ($tombol)
+                                                                                    <form
+                                                                                        action="{{ route('ujian.show', $tombol->id) }}">
+                                                                                        <button type="submit"
+                                                                                            class="btn btn-info">
+                                                                                            <span><i
+                                                                                                    class="fas fa-eye mr-1"></i><b>View</b></span>
+                                                                                        </button>
+                                                                                    </form>
+                                                                                @endif
+                                                                            @endforeach
                                                                         @endif
                                                                     @endif
                                                                 </div>
